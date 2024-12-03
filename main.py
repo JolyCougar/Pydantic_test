@@ -41,3 +41,27 @@ test_dict = {
 print(
     FruitTwo(**test_dict)
 )
+
+
+class Address(BaseModel):
+    street: str = Field(max_length=30)
+    city: str = Field(max_length=30)
+    zip_code: int = Field(ge=0, le=99999)
+
+
+class User(BaseModel):
+    id: int = Field(ge=0)
+    name: str = Field(max_length=10)
+    address: Address
+
+
+user_test = {
+    "id": 1,
+    "name": "Alice",
+    "address": {"street": "123 Main St",
+                "city": "Wonderland",
+                "zip_code": 12345
+                }
+}
+
+print(User(**user_test))
